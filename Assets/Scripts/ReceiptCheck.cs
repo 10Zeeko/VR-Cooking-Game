@@ -26,6 +26,8 @@ public class ReceiptCheck : MonoBehaviour
     private AudioClip winClip;
     [SerializeField]
     private AudioClip loseClip;
+    [SerializeField]
+    private Cook_Timer _timer;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -61,7 +63,9 @@ public class ReceiptCheck : MonoBehaviour
             Instantiate(win, transform.position, Quaternion.identity);
             winPlayAudio.Play();
             Debug.Log("RECETA COMPLETA");
+            Timer.completed = true;
         }
+        // Comprueba si se han puesto todos los ingredientes, en caso de que no esten en el orden correcto para perder
         else
         {
             bool isNotNull = true;
@@ -81,7 +85,7 @@ public class ReceiptCheck : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
-        // En caso de que salgan borrarlos de la lista
+        // En caso de que salgan se borran de la lista
         if (other.gameObject.CompareTag("food"))
         {
             for (int i = 0; i < receta.Length; i++)
