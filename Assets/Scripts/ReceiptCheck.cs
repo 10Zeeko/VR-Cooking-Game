@@ -7,14 +7,25 @@ using UnityEngine;
 public class ReceiptCheck : MonoBehaviour
 {
     [SerializeField]
-    GameObject[] receta;
+    private GameObject[] receta;
     [SerializeField]
-    GameObject[] FinalResult;
+    private GameObject[] FinalResult;
 
     [SerializeField]
-    GameObject win;
+    private GameObject win;
     [SerializeField]
-    ParticleSystem smoke;
+    private ParticleSystem smoke;
+    [SerializeField]
+    private ParticleSystem loseSmoke;
+
+    [SerializeField]
+    private AudioSource winPlayAudio;
+    [SerializeField] 
+    private AudioSource losePlayAudio;
+    [SerializeField]
+    private AudioClip winClip;
+    [SerializeField]
+    private AudioClip loseClip;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -48,7 +59,24 @@ public class ReceiptCheck : MonoBehaviour
             }
             smoke.Play();
             Instantiate(win, transform.position, Quaternion.identity);
+            winPlayAudio.Play();
             Debug.Log("RECETA COMPLETA");
+        }
+        else
+        {
+            bool isNotNull = true;
+            for (int i = 0;i < receta.Length; i++)
+            {
+                if (receta[i] == null)
+                {
+                    isNotNull = false;
+                }
+            }
+            if (isNotNull)
+            {
+                loseSmoke.Play();
+                losePlayAudio.Play();
+            }
         }
     }
     private void OnTriggerExit(Collider other)
