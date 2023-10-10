@@ -1283,11 +1283,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  FinalResult:
-  - {fileID: 1561257441}
-  - {fileID: 377331705}
-  - {fileID: 1490203030}
-  - {fileID: 205974928}
+  FinalResult: 00000000010000000200000003000000
   win: {fileID: 7114906079203058033, guid: d524b0912feee6c4c956a1cd506f98fa, type: 3}
   smoke: {fileID: 480654972}
   loseSmoke: {fileID: 225461828}
@@ -1295,6 +1291,7 @@ MonoBehaviour:
   losePlayAudio: {fileID: 117509419}
   winClip: {fileID: 8300000, guid: 5c1ddae6bf0b96f4a82861d787ba46e1, type: 3}
   loseClip: {fileID: 8300000, guid: 4741e6d51bfba634c9c5359a36670a58, type: 3}
+  _timer: {fileID: 3469287838084785354}
 --- !u!82 &117509418
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1770,7 +1767,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 205974928}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.216, y: 0.118, z: -1.747}
+  m_LocalPosition: {x: -0.164, y: 2.319, z: 1.5557}
   m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -1885,6 +1882,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fa8634bae0658d4ba7376083263aee8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectedFood: 3
   collisionAudio: {fileID: 205974935}
 --- !u!1 &207234205
 GameObject:
@@ -7149,7 +7147,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 377331705}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.58, y: 1, z: 1.5557}
+  m_LocalPosition: {x: -0.194, y: 1.614, z: 1.5557}
   m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -7264,6 +7262,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fa8634bae0658d4ba7376083263aee8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectedFood: 1
   collisionAudio: {fileID: 205974935}
 --- !u!1 &403513948
 GameObject:
@@ -14712,7 +14711,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.58000004, y: -0.03, z: 0.44000003}
+  m_Size: {x: 0.58000004, y: 0.03, z: 0.44000003}
   m_Center: {x: 0.29000002, y: 0.34, z: 0.22000001}
 --- !u!65 &1096149050
 BoxCollider:
@@ -15802,7 +15801,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1490203030}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.2, y: 0.029, z: 1.764}
+  m_LocalPosition: {x: -0.194, y: 1.905, z: 1.5557}
   m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -15917,6 +15916,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fa8634bae0658d4ba7376083263aee8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectedFood: 2
   collisionAudio: {fileID: 205974935}
 --- !u!1 &1561257441
 GameObject:
@@ -16000,7 +16000,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1561257441}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.7137, y: 0.907, z: -0.11}
+  m_LocalPosition: {x: -0.194, y: 1.373, z: 1.5557}
   m_LocalScale: {x: 0.41403002, y: 0.41403002, z: 0.41403002}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -16315,6 +16315,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fa8634bae0658d4ba7376083263aee8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectedFood: 0
   collisionAudio: {fileID: 1561257449}
 --- !u!1 &1637452163
 GameObject:
@@ -17801,6 +17802,7 @@ GameObject:
   - component: {fileID: 543450652021320556}
   - component: {fileID: 3469287838084785353}
   - component: {fileID: 1711813855164796931}
+  - component: {fileID: 3469287838084785354}
   m_Layer: 0
   m_Name: Timer
   m_TagString: Untagged
@@ -17860,3 +17862,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919132147478901206}
   m_Mesh: {fileID: 7203688626665590847, guid: 2912fbffa4d164049b492e55474ceade, type: 3}
+--- !u!114 &3469287838084785354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132147478901206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5ae7b2b4dec92743a1c4637da1fc10c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Time: 30
+  startingDelay: 5
+  m_Running: 1
+  m_Text: {fileID: 743606697}
+  completed: 0
