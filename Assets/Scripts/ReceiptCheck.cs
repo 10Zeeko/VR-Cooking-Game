@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 
 public class ReceiptCheck : MonoBehaviour
@@ -11,6 +13,11 @@ public class ReceiptCheck : MonoBehaviour
     private foodScript[] receta;
     [SerializeField]
     private foodType[] FinalResult;
+
+    [SerializeField]
+    private Texture2D[] ingredientImages;
+    [SerializeField]
+    private GameObject[] canvasImages;
 
     [SerializeField]
     private GameObject win;
@@ -30,12 +37,30 @@ public class ReceiptCheck : MonoBehaviour
     [SerializeField]
     private Cook_Timer _timer;
 
+    void Start()
+    {
+        FinalResult = new foodType[4];
+        var values = Enum.GetValues(typeof(foodType)).Cast<foodType>().ToList();
+        for (int i = 0; i < FinalResult.Length; i++)
+        {
+            int randomIndex = UnityEngine.Random.Range(0, values.Count);
+            FinalResult[i] = values[randomIndex];
+            values.RemoveAt(randomIndex);
+        }
+    
+        for (int i = 0; i < FinalResult.Length; i++)
+        {
+            var imageComponent = canvasImages[i].GetComponent<UnityEngine.UI.Image>();
+            imageComponent.sprite = Sprite.Create(ingredientImages[(int)FinalResult[i]], new Rect(0, 0, ingredientImages[(int)FinalResult[i]].width, ingredientImages[(int)FinalResult[i]].height), Vector2.zero);
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         // Check if 'other' and 'other.gameObject' are not null
         if (other != null && other.gameObject != null)
         {
-            // Añade los objetos que tengan la tag comida dentro de receta
+            // Add objets with 'food' tag
             if (other.gameObject.CompareTag("food"))
             {
                 var foodScriptComponent = other.gameObject.GetComponent<foodScript>();

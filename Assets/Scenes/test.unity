@@ -1284,6 +1284,16 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   FinalResult: 00000000010000000200000003000000
+  ingredientImages:
+  - {fileID: 2800000, guid: a709a2192f5d4944c8da96e73c44670c, type: 3}
+  - {fileID: 2800000, guid: df2b08a6f9682b544b0a178a53189d07, type: 3}
+  - {fileID: 2800000, guid: 0c368ff1ceecb4a4d90e528273f4a5fe, type: 3}
+  - {fileID: 2800000, guid: 3a76db499dfd62c4d8e34a28a0b71932, type: 3}
+  canvasImages:
+  - {fileID: 656588835}
+  - {fileID: 403513948}
+  - {fileID: 746326095}
+  - {fileID: 2028170800}
   win: {fileID: 7114906079203058033, guid: d524b0912feee6c4c956a1cd506f98fa, type: 3}
   smoke: {fileID: 480654972}
   loseSmoke: {fileID: 225461828}
