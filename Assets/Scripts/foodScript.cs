@@ -2,28 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum foodType
+// Enum to represent different types of food
+public enum FoodType
 {
     Bread,
     HotDog,
     Ketchup,
-    Musterd
+    Mustard
 }
 
-public class foodScript : MonoBehaviour
+public class FoodScript : MonoBehaviour
 {
-    public foodType selectedFood;
+    public FoodType SelectedFood;
 
     [SerializeField]
-    private AudioSource collisionAudio;
+    private AudioSource _collisionAudio;
 
     private void Start()
     {
-        collisionAudio = GetComponent<AudioSource>();
+        _collisionAudio = GetComponent<AudioSource>();
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        collisionAudio.Play();
+        _collisionAudio.Play();
     }
 }

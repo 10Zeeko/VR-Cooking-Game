@@ -6,117 +6,115 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-
 public class ReceiptCheck : MonoBehaviour
 {
+    [Header("Randomize Receipt Variables")]
     [SerializeField]
-    private foodScript[] receta;
+    private FoodScript[] _recipe;
     [SerializeField]
-    private foodType[] FinalResult;
+    private FoodType[] _finalResult;
 
     [SerializeField]
-    private Texture2D[] ingredientImages;
+    private Texture2D[] _ingredientImages;
     [SerializeField]
-    private GameObject[] canvasImages;
+    private GameObject[] _canvasImages;
+
+    [Header("Win/Lose")]
+    [SerializeField]
+    private GameObject _win;
+    [SerializeField]
+    private ParticleSystem _smoke;
+    [SerializeField]
+    private ParticleSystem _loseSmoke;
 
     [SerializeField]
-    private GameObject win;
+    private AudioSource _winPlayAudio;
     [SerializeField]
-    private ParticleSystem smoke;
-    [SerializeField]
-    private ParticleSystem loseSmoke;
+    private AudioSource _losePlayAudio;
 
+    [Header("Timer")]
     [SerializeField]
-    private AudioSource winPlayAudio;
-    [SerializeField] 
-    private AudioSource losePlayAudio;
-    [SerializeField]
-    private AudioClip winClip;
-    [SerializeField]
-    private AudioClip loseClip;
-    [SerializeField]
-    private Cook_Timer _timer;
+    private CookTimer _timer;
+
 
     void Start()
     {
-        FinalResult = new foodType[4];
-        var values = Enum.GetValues(typeof(foodType)).Cast<foodType>().ToList();
-        for (int i = 0; i < FinalResult.Length; i++)
+        // Initialize the final result with random food types
+        _finalResult = new FoodType[4];
+        var values = Enum.GetValues(typeof(FoodType)).Cast<FoodType>().ToList();
+        for (int i = 0; i < _finalResult.Length; i++)
         {
             int randomIndex = UnityEngine.Random.Range(0, values.Count);
-            FinalResult[i] = values[randomIndex];
+            _finalResult[i] = values[randomIndex];
             values.RemoveAt(randomIndex);
         }
-    
-        for (int i = 0; i < FinalResult.Length; i++)
+
+        // Assign the corresponding images to the canvas
+        for (int i = 0; i < _finalResult.Length; i++)
         {
-            var imageComponent = canvasImages[i].GetComponent<UnityEngine.UI.Image>();
-            imageComponent.sprite = Sprite.Create(ingredientImages[(int)FinalResult[i]], new Rect(0, 0, ingredientImages[(int)FinalResult[i]].width, ingredientImages[(int)FinalResult[i]].height), Vector2.zero);
+            var imageComponent = _canvasImages[i].GetComponent<UnityEngine.UI.Image>();
+            imageComponent.sprite = Sprite.Create(_ingredientImages[(int)_finalResult[i]], new Rect(0, 0, _ingredientImages[(int)_finalResult[i]].width, _ingredientImages[(int)_finalResult[i]].height), Vector2.zero);
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        // Check if 'other' and 'other.gameObject' are not null
-        if (other != null && other.gameObject != null)
+        // Check if the entering object has the 'food' tag
+        if (other.gameObject.CompareTag("food"))
         {
-            // Add objets with 'food' tag
-            if (other.gameObject.CompareTag("food"))
+            var foodScriptComponent = other.gameObject.GetComponent<FoodScript>();
+            if (foodScriptComponent != null)
             {
-                var foodScriptComponent = other.gameObject.GetComponent<foodScript>();
-                if (foodScriptComponent != null)
+                // Add the food to the first empty slot in the recipe
+                for (int i = 0; i < _recipe.Length; i++)
                 {
-                    for (int i = 0; i < receta.Length; i++)
+                    if (_recipe[i] == null)
                     {
-                        if (receta[i] == null)
-                        {
-                            receta[i] = foodScriptComponent;
-                            break;
-                        }
+                        _recipe[i] = foodScriptComponent;
+                        break;
                     }
                 }
             }
 
+            // Check if the current recipe matches the final result
             bool isSame = true;
-            for (int i = 0; i < receta.Length; i++)
+            for (int i = 0; i < _recipe.Length; i++)
             {
-                // Check if 'receta[i]' is not null
-                if (receta[i] == null || receta[i].selectedFood != FinalResult[i])
+                if (_recipe[i] == null || _recipe[i].SelectedFood != _finalResult[i])
                 {
                     isSame = false;
                     break;
                 }
             }
 
+            // If the recipe is correct, play the win animation and sound, and set the timer to completed
             if (isSame)
             {
-                for (int i = 0; i < receta.Length; i++)
+                for (int i = 0; i < _recipe.Length; i++)
                 {
-                    // Check if 'receta[i]' and 'receta[i].gameObject' are not null
-                    if (receta[i] != null && receta[i].gameObject != null)
+                    if (_recipe[i] != null && _recipe[i].gameObject != null)
                     {
-                        receta[i].gameObject.SetActive(false);
-                        receta[i] = null;
+                        _recipe[i].gameObject.SetActive(false);
+                        _recipe[i] = null;
                     }
                 }
 
-                smoke.Play();
-                Instantiate(win, transform.position, Quaternion.identity);
-                winPlayAudio.Play();
-                Debug.Log("RECETA COMPLETA");
+                _smoke.Play();
+                Instantiate(_win, transform.position, Quaternion.identity);
+                _winPlayAudio.Play();
 
-                // Check if '_timer' is not null
                 if (_timer != null)
                 {
-                    _timer.completed = true;
+                    _timer.Completed = true;
                 }
             }
             else
             {
+                // If all recipe slots are filled but the recipe is incorrect, play the lose animation and sound
                 bool isNotNull = true;
-                for (int i = 0; i < receta.Length; i++)
+                for (int i = 0; i < _recipe.Length; i++)
                 {
-                    if (receta[i] == null)
+                    if (_recipe[i] == null)
                     {
                         isNotNull = false;
                     }
@@ -124,8 +122,8 @@ public class ReceiptCheck : MonoBehaviour
 
                 if (isNotNull)
                 {
-                    loseSmoke.Play();
-                    losePlayAudio.Play();
+                    _loseSmoke.Play();
+                    _losePlayAudio.Play();
                 }
             }
         }
@@ -133,24 +131,25 @@ public class ReceiptCheck : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        // En caso de que salgan se borran de la lista
+        // Check if the exiting object has the 'food' tag
         if (other.gameObject.CompareTag("food"))
         {
-            for (int i = 0; i < receta.Length; i++)
+            // Remove the food from the recipe and shift the remaining foods to fill the gap
+            for (int i = 0; i < _recipe.Length; i++)
             {
-                if (receta[i].gameObject == other.gameObject)
+                if (_recipe[i].gameObject == other.gameObject)
                 {
-                    receta[i] = null;
-                    // Mover la lista para que no quede un hueco en medio
-                    for (int j = i; j < receta.Length - 1; j++)
+                    _recipe[i] = null;
+
+                    for (int j = i; j < _recipe.Length - 1; j++)
                     {
-                        receta[j] = receta[j + 1];
+                        _recipe[j] = _recipe[j + 1];
                     }
-                    receta[receta.Length - 1] = null;
+
+                    _recipe[_recipe.Length - 1] = null;
                     break;
                 }
             }
         }
     }
 }
-
