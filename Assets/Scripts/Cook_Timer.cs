@@ -17,27 +17,40 @@ public class Cook_Timer : MonoBehaviour
     private TextMeshProUGUI m_Text;
 
     public bool completed = false;
-    // Start is called before the first frame update
+
     void Start()
     {
-        Invoke("susbtsractTime", startingDelay);
+        Invoke("SubtractTime", startingDelay);
     }
 
-    private void susbtsractTime()
+    void SubtractTime()
     {
         m_Time -= 1;
         m_Text.text = m_Time.ToString();
         if (m_Time <= 0)
         {
             m_Running = false;
+            if (!completed)
+            {
+                Invoke("RestartScene", 3f);
+            }
+            else
+            {
+                m_Text.color = Color.green;
+                m_Running = true;
+                m_Time = 4;
+                Invoke("RestartScene", 4f);
+            }
+
         }
         if (m_Running)
         {
-            Invoke("susbtsractTime", 1);
+            Invoke("SubtractTime", 1);
         }
-        if (!completed && m_Time <= 0)
-        {
-            SceneManager.LoadScene("test");
-        }
+    }
+
+    void RestartScene()
+    {
+        SceneManager.LoadScene("test");
     }
 }
