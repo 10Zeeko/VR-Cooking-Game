@@ -23,4 +23,4 @@ https://www.kenney.nl/
 
 ## Credits
 
-This game was created by Pol Garriga using Unity and VR.
+This game was created by Pol Garriga.
