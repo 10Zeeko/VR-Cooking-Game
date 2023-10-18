@@ -1427,8 +1427,6 @@ MonoBehaviour:
   _loseSmoke: {fileID: 225461828}
   _winPlayAudio: {fileID: 117509418}
   _losePlayAudio: {fileID: 117509419}
-  _winClip: {fileID: 8300000, guid: 5c1ddae6bf0b96f4a82861d787ba46e1, type: 3}
-  _loseClip: {fileID: 8300000, guid: 4741e6d51bfba634c9c5359a36670a58, type: 3}
   _timer: {fileID: 3469287838084785354}
 --- !u!82 &117509418
 AudioSource:
@@ -1639,7 +1637,7 @@ GameObject:
   - component: {fileID: 205974936}
   - component: {fileID: 205974935}
   m_Layer: 0
-  m_Name: Musterd
+  m_Name: Mustard
   m_TagString: food
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2020,8 +2018,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fa8634bae0658d4ba7376083263aee8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SelectedFood: 0
-  _collisionAudio: {fileID: 0}
+  SelectedFood: 3
+  _collisionAudio: {fileID: 205974935}
 --- !u!1 &207234205
 GameObject:
   m_ObjectHideFlags: 0
@@ -7400,8 +7398,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fa8634bae0658d4ba7376083263aee8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SelectedFood: 0
-  _collisionAudio: {fileID: 0}
+  SelectedFood: 1
+  _collisionAudio: {fileID: 377331712}
 --- !u!1 &403513948
 GameObject:
   m_ObjectHideFlags: 0
@@ -16054,8 +16052,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fa8634bae0658d4ba7376083263aee8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SelectedFood: 0
-  _collisionAudio: {fileID: 0}
+  SelectedFood: 2
+  _collisionAudio: {fileID: 1490203037}
 --- !u!1 &1561257441
 GameObject:
   m_ObjectHideFlags: 0
@@ -16454,7 +16452,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SelectedFood: 0
-  _collisionAudio: {fileID: 0}
+  _collisionAudio: {fileID: 1561257449}
 --- !u!1 &1637452163
 GameObject:
   m_ObjectHideFlags: 0
